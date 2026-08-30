@@ -17,6 +17,7 @@ const githubRouter = require('./Routes/githubRoute')
 
 const app = express()
 
+app.set('trust proxy', 1);
 app.use(passport.initialize())
 
 app.use(express.json({ limit: '10kb' }))
