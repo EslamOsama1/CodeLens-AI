@@ -8,7 +8,7 @@ const appErorr = require('../utils/appErorr')
 const catchAsync = require('../utils/catchAsync')
 const sendEmail = require('./../utils/email')
 
-const createSendToken = (user, statusCode, res) => {
+const createSendToken = (user, statusCode, res, redirectUrl = null) => {
     //create a token 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES_IN
@@ -33,6 +33,10 @@ const createSendToken = (user, statusCode, res) => {
     //remove password from output
     user.password = undefined;
 
+    // OAuth redirect
+    if (redirectUrl) {
+        return res.redirect(redirectUrl)
+    }
 
     //send the response
     res.status(statusCode).json({
@@ -192,5 +196,5 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 
 
 exports.oauthCallback = catchAsync(async (req, res, next) => {
-    createSendToken(req.user, 200, res)
+    createSendToken(req.user, 200, res, 'http://localhost:3000/dashboard')
 })
