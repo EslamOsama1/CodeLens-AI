@@ -1,3 +1,4 @@
+const cookieParser = require('cookie-parser')
 const express = require('express')
 const appErorr = require('./utils/appErorr')
 const passport = require('passport')
@@ -16,6 +17,7 @@ const reviewRouter = require('./Routes/reviewRoute')
 const githubRouter = require('./Routes/githubRoute')
 
 const app = express()
+app.use(cookieParser())
 
 app.get('/health', (req, res) => {
     res.status(200).json({
