@@ -2,9 +2,7 @@ const axios = require('axios')
 const appErorr = require('../utils/appErorr')
 const catchAsync = require('../utils/catchAsync')
 const User = require('../models/userModel')
-const { reviewCode } = require("../services/aiService");
-const { reviewRepository } = require("../services/aiService");
-const CodeChunker = require('../utils/codeChunker')
+const { reviewCode, reviewRepository } = require("../services/aiService");
 const Review = require('../models/reviewModel')
 
 exports.getMyRepositories = catchAsync(async (req, res, next) => {

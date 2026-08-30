@@ -6,10 +6,15 @@ const mongoose = require('mongoose')
 const PORT = process.env.PORT || 5000
 const DB = process.env.DB
 
-mongoose.connect(DB).then(() => console.log("DB connection successfully"))
-    .catch(err => console.log(err))
+mongoose.connect(DB)
+    .then(() => {
+        console.log('DB connection successfully')
 
-const server = app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
-})
-
+        app.listen(PORT, () => {
+            console.log(`Server running on port ${PORT}`)
+        })
+    })
+    .catch(err => {
+        console.log('Database connection failed:', err)
+        process.exit(1)
+    })

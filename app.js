@@ -3,6 +3,12 @@ const appErorr = require('./utils/appErorr')
 const passport = require('passport')
 require('./OAuth/googleStrategy')
 
+const morgan = require('morgan');
+const rateLimit = require('express-rate-limit')
+const helmet = require('helmet')
+const hpp = require('hpp')
+const cors = require('cors')
+
 const globalErrorHandler = require('./controllers/errorController')
 const userRouter = require('./Routes/userRoute')
 const authRouter = require('./Routes/authRoute')
@@ -14,6 +20,20 @@ const app = express()
 app.use(passport.initialize())
 
 app.use(express.json({ limit: '10kb' }))
+
+// Security
+app.use(helmet());
+app.use(cors());
+
+// Rate Limiting
+const limiter = rateLimit({
+    max: 100,
+    windowMs: 60 * 60 * 1000,
+    message: 'Too many requests from this IP, please try again in an hour'
+});
+app.use('/api', limiter);
+
+app.use(hpp());
 
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/auth', authRouter)
