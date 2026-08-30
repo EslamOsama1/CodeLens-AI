@@ -1,0 +1,33 @@
+const express = require('express')
+const userController = require('../controllers/userController')
+const authController = require('../controllers/authController')
+
+const userRouter = express.Router()
+
+
+// Public routes
+userRouter.post('/signup', authController.signup)
+userRouter.post('/login', authController.login)
+userRouter.post('/forgotPassword', authController.forgotPassword)
+userRouter.patch('/resetPassword/:token', authController.resetPassword)
+
+userRouter.use(authController.protect);
+
+userRouter.patch('/updateMyPassword', authController.updatePassword)
+userRouter.patch('/updateMe', userController.updateMe)
+userRouter.delete('/deleteMe', userController.deleteMe);
+userRouter.get('/me', userController.getMe, userController.getUser);
+userRouter.post('/logout', authController.logout)
+
+// Admin routes
+userRouter.use(authController.restrictTo("admin"));
+
+userRouter.route('/')
+    .get(userController.getAllUsers)
+
+userRouter.route('/:id')
+    .get(userController.getUser)
+    .patch(userController.promoteToAdmin)
+    .delete(userController.deleteUser)
+
+module.exports = userRouter
