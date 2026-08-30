@@ -17,6 +17,12 @@ const githubRouter = require('./Routes/githubRoute')
 
 const app = express()
 
+app.get('/health', (req, res) => {
+    res.status(200).json({
+        status: 'success',
+        message: 'CodeLens AI API is running'
+    });
+});
 app.set('trust proxy', 1);
 app.use(passport.initialize())
 
