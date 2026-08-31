@@ -432,30 +432,6 @@ https://your-api-domain.com
 
 ---
 
-## 🗺️ Roadmap
-
-* [ ] JWT authentication
-* [ ] User management
-* [ ] Google OAuth
-* [ ] GitHub OAuth
-* [ ] GitHub repository integration
-* [ ] Code file upload
-* [ ] Pasted code submission
-* [ ] AI-powered code review
-* [ ] Issue severity classification
-* [ ] Code quality score
-* [ ] Advanced multi-file analysis
-* [ ] Complete repository analysis
-* [ ] Review history
-* [ ] Pull Request integration
-* [ ] GitHub Webhooks
-* [ ] Automated Pull Request reviews
-* [ ] More programming languages
-* [ ] Improved AI analysis
-* [ ] Frontend application
-
----
-
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome.
